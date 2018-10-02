@@ -62,6 +62,7 @@ RUN wget -q "https://github.com/mozilla/geckodriver/releases/download/$GECKO_DRI
 COPY bin/chromedriver.sh /opt/robotframework/bin/chromedriver
 COPY bin/chromium-browser.sh /opt/robotframework/bin/chromium-browser
 COPY bin/run-tests-in-virtual-screen.sh /opt/robotframework/bin/
+COPY bin/xvfb-run.sh /usr/bin/xvfb-run
 
 # FIXME: below is a workaround, as the path is ignored
 RUN mv /usr/lib/chromium/chrome /usr/lib/chromium/chrome-original \
