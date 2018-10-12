@@ -17,16 +17,22 @@ ENV SCREEN_WIDTH 1920
 ENV ROBOT_THREADS 1
 
 # Dependency versions
-ENV CHROMIUM_VERSION 68.0
+ENV CHROMIUM_VERSION 69.0
 ENV FAKER_VERSION 4.2.0
-ENV FIREFOX_VERSION 52.9
-ENV GECKO_DRIVER_VERSION v0.22.0
+ENV ICU_LIBS_VERSION 62.1
+ENV FIREFOX_VERSION 62.0
+ENV DBUS_VERSION 1.10.24
+ENV GECKO_DRIVER_VERSION v0.23.0
 ENV PABOT_VERSION 0.43
 ENV PYTHON_PIP_VERSION 10.0
 ENV REQUESTS_VERSION 0.4.7
 ENV ROBOT_FRAMEWORK_VERSION 3.0.4
-ENV SELENIUM_LIBRARY_VERSION 3.1.1
+ENV SELENIUM_LIBRARY_VERSION 3.2.0
 ENV XVFB_VERSION 1.20
+
+# Add testing repository for Firefox
+RUN echo "@edge http://dl-cdn.alpinelinux.org/alpine/edge/main" >> /etc/apk/repositories
+RUN echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" >> /etc/apk/repositories
 
 # Upgrade system library
 RUN apk update && \
@@ -36,7 +42,9 @@ RUN apk update && \
 RUN apk add --no-cache \
   chromium-chromedriver>$CHROMIUM_VERSION \
   chromium>$CHROMIUM_VERSION \
-  firefox-esr>$FIREFOX_VERSION \
+  icu-libs@edge>$ICU_LIBS_VERSION \
+  firefox@testing>$FIREFOX_VERSION ttf-freefont \
+  dbus-x11>$DBUS_VERSION \
   py2-pip>$PYTHON_PIP_VERSION \
   xauth \
   xvfb>$XVFB_VERSION \
