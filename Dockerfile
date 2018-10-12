@@ -51,6 +51,9 @@ RUN apk add --no-cache \
   which \
   wget
 
+# Update pip version
+RUN pip install --upgrade pip
+
 # Install Robot Framework and Selenium Library
 RUN pip install \
   robotframework==$ROBOT_FRAMEWORK_VERSION \
